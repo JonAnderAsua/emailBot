@@ -10,11 +10,11 @@ def getHelbideak(s):
     helbideak = []
     file = open(s)
     lines = file.readlines()
-    i = 0
+    i = 1
 
     #Lerro bakoitzean email bakarra dagoenez lerro osoa hartuko da
     for line in lines:
-        helbideak[i] = str(line)
+        helbideak.append(str(line))
         i += 1
     return helbideak
 
@@ -41,7 +41,7 @@ def bucle():
     while(True):
         main()
         i += 1
-        print(i + ". iterazioa")
+        print(str(i) +  ". iterazioa")
         time.sleep(5) #5 segundu geldirik
 
 
@@ -53,13 +53,14 @@ def main():
     password = '' #Korreoaren pasahitza
 
 
+
     for helbide in helbideak:
 
         #Mezua sortu eta konfigurazio nagusia ezarri
         msg = MIMEMultipart()
-        msg['Subject'] = "Pierda hasta el 19% de su peso. Un nuevo sistema para adelgazar está aquí."
+        msg['Subject'] = "SPAM mezua"
         msg['From'] = login
-        msg['To'] = helbide['email']
+        msg['To'] = helbide
 
         # Testua eraiki
         testua = MIMEText(getMessage("message.txt"))
@@ -73,9 +74,12 @@ def main():
         msg.attach(attach_image)
 
         mezuaBidali(smtpserver, login, password, msg)
-        print('Sent to ' + helbide['email'])
-
+        print('Sent to ' + helbide)
 
 if __name__ == "__main__":
-    main() #Sin bucle
-    #bucle() #Con bucle
+    aukera = str(input("Aukeratu normal (n) ala buklea (b)"))
+    if(aukera == "b"):
+        bucle() #Con bucle
+    else:
+        main() #Sin bucle
+
