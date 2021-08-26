@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 # Bidali nahi diren helbideak eskuratzeko metodoa
-def getHelblideak(s):
+def getHelbideak(s):
     helbideak = []
     file = open(s)
     lines = file.readlines()
@@ -37,7 +37,7 @@ def getMessage(s):
 
 # Metodo nagusia
 def main():
-    helbideak = getHelblideak('helbideak.txt')
+    helbideak = getHelbideak('helbideak.txt')
     smtpserver = 'smtp.gmail.com:587' #Zein mezu protokoloa erabiliko da, kasu honetan gmailaren smtp protokoloa
     login = 'jasuamiranda1998@gmail.com' #Zein mezu helbidetik bidaliko da
     password = '' #Korreoaren pasahitza
@@ -48,7 +48,7 @@ def main():
         #Mezua sortu eta konfigurazio nagusia ezarri
         msg = MIMEMultipart()
         msg['Subject'] = "Pierda hasta el 19% de su peso. Un nuevo sistema para adelgazar está aquí."
-        msg['From'] = 'jasuamiranda1998@gmail.com'
+        msg['From'] = login
         msg['To'] = helbide['email']
 
         # Testua eraiki
