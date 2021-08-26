@@ -2,6 +2,7 @@ import smtplib
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import time
 
 
 # Bidali nahi diren helbideak eskuratzeko metodoa
@@ -35,6 +36,15 @@ def getMessage(s):
         message += l + "\n"
     return message
 
+def bucle():
+    i = 0
+    while(True):
+        main()
+        i += 1
+        print(i + ". iterazioa")
+        time.sleep(5) #5 segundu geldirik
+
+
 # Metodo nagusia
 def main():
     helbideak = getHelbideak('helbideak.txt')
@@ -67,4 +77,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() #Sin bucle
+    #bucle() #Con bucle
