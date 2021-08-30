@@ -25,7 +25,9 @@ def getHelbideak(s):
         i += 1
 
 # Mezua bidaltzeko metodoa
-def mezuaBidali(smtpserver, login, password, msg):
+def mezuaBidali(msg):
+    global smtpserver,login,password
+
     server = smtplib.SMTP(smtpserver)
     server.starttls()
     server.login(login, password)
@@ -72,12 +74,10 @@ def main():
         msg.attach(testua)
         msg.attach(attach_image)
 
-        mezuaBidali(smtpserver, login, password, msg)
+        mezuaBidali(msg)
         print('Sent to ' + helbide)
 
 def getDatuak():
-    global helbideak,mezua
-
     getHelbideak('helbideak.txt') #Helbideen fitxategia
     getMessage("message.txt") #Mezua dagoen fitxategia
 
