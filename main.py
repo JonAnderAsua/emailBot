@@ -6,9 +6,9 @@ import time
 
 helbideak = []
 mezua = ""
-login = ""
-smtpserver = ''
-password = ''
+smtpserver = 'smtp.gmail.com:587'  # Zein mezu protokoloa erabiliko da, kasu honetan gmailaren smtp protokoloa
+login = 'jasuamiranda1998@gmail.com'  # Zein mezu helbidetik bidaliko da
+password = ''  # Korreoaren pasahitza'
 
 # Bidali nahi diren helbideak eskuratzeko metodoa
 def getHelbideak(s):
@@ -82,19 +82,8 @@ def getDatuak():
     getMessage("message.txt") #Mezua dagoen fitxategia
 
 
-def konfiguratu():
-    global smtpserver,login,password
-
-    smtpserver = 'smtp.gmail.com:587'  # Zein mezu protokoloa erabiliko da, kasu honetan gmailaren smtp protokoloa
-    login = 'jasuamiranda1998@gmail.com'  # Zein mezu helbidetik bidaliko da
-    password = ''  # Korreoaren pasahitza
-
 if __name__ == "__main__":
     aukera = str(input("Aukeratu normal (n) ala buklea (b)"))
-
-
-    konfiguratu()
-    print("Zerbitzaria konfiguratzen...")
 
     getDatuak()
     print("Datuak hartzen...")
