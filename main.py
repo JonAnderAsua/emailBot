@@ -4,6 +4,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
 
+helbideak = []
+mezua = ""
+login = ""
+smtpserver = ''
+password = ''
 
 # Bidali nahi diren helbideak eskuratzeko metodoa
 def getHelbideak(s):
@@ -47,15 +52,8 @@ def bucle():
 
 # Metodo nagusia
 def main():
-    helbideak = getHelbideak('helbideak.txt')
-    smtpserver = 'smtp.gmail.com:587' #Zein mezu protokoloa erabiliko da, kasu honetan gmailaren smtp protokoloa
-    login = 'jasuamiranda1998@gmail.com' #Zein mezu helbidetik bidaliko da
-    password = '' #Korreoaren pasahitza
-
-
 
     for helbide in helbideak:
-
         #Mezua sortu eta konfigurazio nagusia ezarri
         msg = MIMEMultipart()
         msg['Subject'] = "SPAM mezua"
@@ -63,7 +61,7 @@ def main():
         msg['To'] = helbide
 
         # Testua eraiki
-        testua = MIMEText(getMessage("message.txt"))
+        testua = MIMEText(mezua)
 
         # Irudia eraiki
         file = open("image.png", "rb")
@@ -76,10 +74,35 @@ def main():
         mezuaBidali(smtpserver, login, password, msg)
         print('Sent to ' + helbide)
 
+def getDatuak():
+    global helbideak,mezua
+
+    helbideak = getHelbideak('helbideak.txt')
+    mezua = getMessage("message.txt")
+
+
+def konfiguratu():
+    global smtpserver,login,password
+
+    smtpserver = 'smtp.gmail.com:587'  # Zein mezu protokoloa erabiliko da, kasu honetan gmailaren smtp protokoloa
+    login = 'jasuamiranda1998@gmail.com'  # Zein mezu helbidetik bidaliko da
+    password = ''  # Korreoaren pasahitza
+
 if __name__ == "__main__":
     aukera = str(input("Aukeratu normal (n) ala buklea (b)"))
+
+
+    konfiguratu()
+    print("Zerbitzaria konfiguratzen...")
+
+    getDatuak()
+    print("Datuak hartzen...")
+
+
     if(aukera == "b"):
+        print("Bukle infinitoa egingo da")
         bucle() #Con bucle
     else:
+        print("Bidalketa normala egingo da")
         main() #Sin bucle
 
