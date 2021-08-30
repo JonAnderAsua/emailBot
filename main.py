@@ -12,6 +12,8 @@ password = ''
 
 # Bidali nahi diren helbideak eskuratzeko metodoa
 def getHelbideak(s):
+    global helbideak
+
     helbideak = []
     file = open(s)
     lines = file.readlines()
@@ -21,7 +23,6 @@ def getHelbideak(s):
     for line in lines:
         helbideak.append(str(line))
         i += 1
-    return helbideak
 
 # Mezua bidaltzeko metodoa
 def mezuaBidali(smtpserver, login, password, msg):
@@ -33,13 +34,14 @@ def mezuaBidali(smtpserver, login, password, msg):
 
 #Mezuaren mamia kargatzeko metodoa
 def getMessage(s):
+    global mezua
+
     file = open(s).readlines()
-    message = ""
 
     #Mezua lerroz lerro gehituko da
     for l in file:
-        message += l + "\n"
-    return message
+        mezua += l + "\n"
+
 
 def bucle():
     i = 0
@@ -52,7 +54,6 @@ def bucle():
 
 # Metodo nagusia
 def main():
-
     for helbide in helbideak:
         #Mezua sortu eta konfigurazio nagusia ezarri
         msg = MIMEMultipart()
@@ -77,8 +78,8 @@ def main():
 def getDatuak():
     global helbideak,mezua
 
-    helbideak = getHelbideak('helbideak.txt')
-    mezua = getMessage("message.txt")
+    getHelbideak('helbideak.txt') #Helbideen fitxategia
+    getMessage("message.txt") #Mezua dagoen fitxategia
 
 
 def konfiguratu():
